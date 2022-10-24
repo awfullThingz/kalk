@@ -145,6 +145,7 @@ public class Main {
                     otvet = num1 * num2;
                     break;
             }
+
             if (nums.length > 2) {
                 sluch = 2;
             }
