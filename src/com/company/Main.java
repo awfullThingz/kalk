@@ -6,13 +6,15 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args)  {
+        System.out.println("Введите выражение");
         Scanner scanner = new Scanner(System.in);
-        String ex = scanner.nextLine();
-        System.out.println(calc(ex));
+        String input = scanner.nextLine();
+        System.out.println(calc(input));
     }
 
-    public static String calc(String ex)  {
-        String[] oper = {"+", "-", "/", "*"};
+    public static String calc(String input)  {
+        input = input.replace(" ","");
+        String[] oper = {"+", "-", "/", "*","+-"};
         int num1 = 1;
         int num2 = 1;
         int otvet = 0;
@@ -20,14 +22,16 @@ public class Main {
         String[] nums = {};
         String itogtvet = null;
 
-            if (ex.contains("+")) {
-                nums = ex.split("\\+");
-            } else if (ex.contains("-")) {
-                nums = ex.split("\\-");
-            } else if (ex.contains("/")) {
-                nums = ex.split("\\/");
-            } else if (ex.contains("*")) {
-                nums = ex.split("\\*");
+            if (input.contains("+")) {
+                nums = input.split("\\+");
+            } else if (input.contains("-")) {
+                nums = input.split("\\-");
+            } else if (input.contains("/")) {
+                nums = input.split("\\/");
+            } else if (input.contains("*")) {
+                nums = input.split("\\*");
+            } else {
+                new IllegalArgumentException();
             }
 
             String[] roman = {"0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
@@ -125,9 +129,9 @@ public class Main {
                 }
             }
 
-            int operIndex = 0;
+            int operIndex = -1;
             for (int i = 0; i < oper.length; i++) {
-                if (ex.contains(oper[i])) {
+                if (input.contains(oper[i])) {
                     operIndex = i;
                 }
             }
@@ -144,6 +148,9 @@ public class Main {
                 case 3:
                     otvet = num1 * num2;
                     break;
+                case 4:
+                    sluch = 2;
+                    break;
             }
 
             if (nums.length > 2) {
@@ -159,7 +166,7 @@ public class Main {
             }
             if (sluch == 1) {
                 itogtvet = (roman[otvet]);
-            } else if (sluch == 2) {
+            } else if (  sluch == 2) {
                 throw new IllegalArgumentException("");
             } else if (sluch == 3) {
                 itogtvet = String.valueOf(otvet);
